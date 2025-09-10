@@ -1,11 +1,11 @@
 variable "aws_region" {
   type    = string
-  default = "us-west-1" # change as needed
+  default = "sa-east-1" # Change as needed
 }
 
 variable "cluster_name" {
   type    = string
-  default = "private-eks-cluster"
+  default = "private-eks-cluster1"
 }
 
 variable "vpc_cidr" {
@@ -25,7 +25,7 @@ variable "private_subnets_cidrs" {
 
 variable "availability_zones" {
   type    = list(string)
-  default = [] # default empty = auto-pick from data source
+  default = [] # auto-pick if empty
 }
 
 variable "node_group_instance_types" {

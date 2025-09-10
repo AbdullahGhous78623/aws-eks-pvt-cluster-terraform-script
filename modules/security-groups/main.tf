@@ -1,10 +1,9 @@
-# Security Group for EKS workers
 resource "aws_security_group" "workers" {
   name        = "${var.cluster_name}-workers-sg"
   description = "Security group for EKS worker nodes"
-  vpc_id      = aws_vpc.this.id
+  vpc_id      = var.vpc_id
 
-  # allow nodes to talk to each other
+  # Allow intra-node communication
   ingress {
     from_port   = 0
     to_port     = 0
@@ -13,7 +12,7 @@ resource "aws_security_group" "workers" {
     description = "Allow intra-node communication"
   }
 
-  # allow nodes to talk to cluster control plane (port 443)
+  # Allow worker nodes to talk to EKS control plane
   ingress {
     from_port   = 443
     to_port     = 443
@@ -22,6 +21,7 @@ resource "aws_security_group" "workers" {
     description = "Allow nodes to reach control plane"
   }
 
+  # Allow all egress
   egress {
     from_port   = 0
     to_port     = 0
@@ -29,5 +29,7 @@ resource "aws_security_group" "workers" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = { Name = "${var.cluster_name}-workers-sg" }
+  tags = {
+    Name = "${var.cluster_name}-workers-sg"
+  }
 }

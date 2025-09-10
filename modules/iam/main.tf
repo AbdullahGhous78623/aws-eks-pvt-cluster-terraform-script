@@ -1,4 +1,4 @@
-# EKS cluster IAM role
+# EKS Cluster IAM Role
 resource "aws_iam_role" "eks_cluster" {
   name               = "${var.cluster_name}-cluster-role"
   assume_role_policy = data.aws_iam_policy_document.eks_assume_role.json
@@ -25,7 +25,7 @@ resource "aws_iam_role_policy_attachment" "eks_cluster_AmazonEKSServicePolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSServicePolicy"
 }
 
-# Node group IAM role
+# Node Group IAM Role
 resource "aws_iam_role" "node_group" {
   name               = "${var.cluster_name}-node-role"
   assume_role_policy = data.aws_iam_policy_document.node_assume_role.json
@@ -42,7 +42,7 @@ data "aws_iam_policy_document" "node_assume_role" {
   }
 }
 
-# Attach managed policies for EKS worker nodes
+# Attach managed policies for EKS Worker Nodes
 resource "aws_iam_role_policy_attachment" "node_AmazonEKSWorkerNodePolicy" {
   role       = aws_iam_role.node_group.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
@@ -58,7 +58,7 @@ resource "aws_iam_role_policy_attachment" "node_AmazonEKS_CNI_Policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
 }
 
-# Optionally add inline policy for SSM (useful for debugging)
+# Optional: SSM Policy for debugging
 resource "aws_iam_role_policy_attachment" "node_AmazonSSMManagedInstanceCore" {
   role       = aws_iam_role.node_group.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
