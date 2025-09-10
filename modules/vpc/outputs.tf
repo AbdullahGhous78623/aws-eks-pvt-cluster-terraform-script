@@ -2,14 +2,18 @@ output "vpc_id" {
   value = aws_vpc.this.id
 }
 
-output "public_subnets" {
+output "public_subnet_ids" {
   value = [for subnet in aws_subnet.public : subnet.id]
 }
 
-output "private_subnets" {
+output "private_subnet_ids" {
   value = [for subnet in aws_subnet.private : subnet.id]
 }
 
-output "nat_gateway_id" {
-  value = aws_nat_gateway.nat.id
+output "public_rt_id" {
+  value = aws_route_table.public.id
+}
+
+output "private_rt_id" {
+  value = aws_route_table.private.id
 }

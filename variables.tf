@@ -1,54 +1,43 @@
 variable "aws_region" {
-  type    = string
-  default = "sa-east-1" # Change as needed
+  type = string
 }
 
 variable "cluster_name" {
-  type    = string
-  default = "private-eks-cluster1"
+  type = string
 }
 
 variable "vpc_cidr" {
-  type    = string
-  default = "10.10.0.0/16"
+  type = string
 }
 
 variable "public_subnets_cidrs" {
-  type    = list(string)
-  default = ["10.10.1.0/24", "10.10.2.0/24"]
+  type = list(string)
 }
 
 variable "private_subnets_cidrs" {
-  type    = list(string)
-  default = ["10.10.11.0/24", "10.10.12.0/24"]
+  type = list(string)
 }
 
 variable "availability_zones" {
-  type    = list(string)
-  default = [] # auto-pick if empty
+  type = list(string)
 }
 
 variable "node_group_instance_types" {
-  type    = list(string)
-  default = ["t2.medium"]
+  type = list(string)
 }
 
 variable "node_group_desired" {
-  type    = number
-  default = 2
+  type = number
 }
 
 variable "node_group_min" {
-  type    = number
-  default = 1
+  type = number
 }
 
 variable "node_group_max" {
-  type    = number
-  default = 3
+  type = number
 }
 
 variable "cluster_version" {
-  type    = string
-  default = "1.28"
+  type = string
 }
